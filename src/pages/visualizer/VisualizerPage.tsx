@@ -25,7 +25,7 @@ function funcCargo(unitType: 'factories' | 'robots', resource: keyof Cargo): Cha
 
 const funcLichen: ChartFunction = team => team.factories.reduce((acc, val) => acc + val.lichen, 0);
 
-const funcMetalValue: ChartFunction = team =>
+const funcTotalMetalValue: ChartFunction = team =>
   team.factories.reduce((acc, val) => acc + val.cargo.metal, 0) +
   team.robots.filter(robot => robot.type === RobotType.Light).length * 10 +
   team.robots.filter(robot => robot.type === RobotType.Heavy).length * 100 +
@@ -90,8 +90,8 @@ export function VisualizerPage(): JSX.Element {
         </Grid.Col>
         <Grid.Col span={12} md={4}>
           <Chart
-            title="Metal value"
-            func={funcMetalValue}
+            title="Total metal value"
+            func={funcTotalMetalValue}
             info="Metal in factories + #light robots * light cost + #heavy robots * heavy cost + (ore in factories + ore in robots) * ore to metal ratio"
           />
         </Grid.Col>
