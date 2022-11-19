@@ -58,7 +58,7 @@ export function KagglePage(): JSX.Element {
         <div style={{ textAlign: 'center' }}>
           <Loader />
           <Title>Waiting for episode data from Kaggle</Title>
-          {seconds >= 3 && <Text>This is taking longer than expected, please rerun the cell.</Text>}
+          {seconds >= 3 && <Text>This is taking longer than expected, please rerun the cell or refresh the page.</Text>}
         </div>
       </Center>
     );
