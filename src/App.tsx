@@ -138,7 +138,7 @@ export function App(): JSX.Element {
     <Link
       key="home"
       to={`/${location.search}`}
-      className={cx(classes.link, { [classes.linkActive]: location.pathname == '/' })}
+      className={cx(classes.link, { [classes.linkActive]: location.pathname === '/' })}
       onClick={closeBurger}
     >
       Home
@@ -150,7 +150,7 @@ export function App(): JSX.Element {
       <Link
         key="visualizer"
         to={`/visualizer${location.search}`}
-        className={cx(classes.link, { [classes.linkActive]: location.pathname == '/visualizer' })}
+        className={cx(classes.link, { [classes.linkActive]: location.pathname === '/visualizer' })}
         onClick={closeBurger}
       >
         Visualizer

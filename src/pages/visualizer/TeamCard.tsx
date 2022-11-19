@@ -45,7 +45,7 @@ function compareUnits(a: Unit, b: Unit): number {
   const partsA = a.unitId.split('_');
   const partsB = b.unitId.split('_');
 
-  if (partsA[0] == partsB[0]) {
+  if (partsA[0] === partsB[0]) {
     return parseInt(partsA[1]) - parseInt(partsB[1]);
   }
 

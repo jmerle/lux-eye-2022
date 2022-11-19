@@ -36,8 +36,8 @@ const funcFactories: ChartFunction = team => team.factories.length;
 const funcFactoryPower: ChartFunction = team => team.factories.reduce((acc, val) => acc + val.power, 0);
 
 const funcRobots: ChartFunction = team => team.robots.length;
-const funcLightRobots: ChartFunction = team => team.robots.filter(robot => robot.type == RobotType.Light).length;
-const funcHeavyRobots: ChartFunction = team => team.robots.filter(robot => robot.type == RobotType.Heavy).length;
+const funcLightRobots: ChartFunction = team => team.robots.filter(robot => robot.type === RobotType.Light).length;
+const funcHeavyRobots: ChartFunction = team => team.robots.filter(robot => robot.type === RobotType.Heavy).length;
 const funcRobotPower: ChartFunction = team => team.robots.reduce((acc, val) => acc + val.power, 0);
 
 export function VisualizerPage(): JSX.Element {

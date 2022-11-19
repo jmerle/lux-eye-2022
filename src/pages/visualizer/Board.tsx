@@ -135,7 +135,7 @@ function drawRobot(
 
   const isSelected = selectedTile !== null && robot.tile.x === selectedTile.x && robot.tile.y === selectedTile.y;
 
-  if (robot.type == RobotType.Light) {
+  if (robot.type === RobotType.Light) {
     ctx.fillStyle = getTeamColor(team, 1.0);
     ctx.strokeStyle = 'black';
     ctx.lineWidth = isSelected ? 2 : 1;

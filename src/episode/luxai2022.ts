@@ -226,7 +226,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
           power: rawRobot.power,
           cargo: rawRobot.cargo,
 
-          type: rawRobot.unit_type == 'LIGHT' ? RobotType.Light : RobotType.Heavy,
+          type: rawRobot.unit_type === 'LIGHT' ? RobotType.Light : RobotType.Heavy,
           actionQueue: actionQueue.map((action: any) => parseRobotAction(action)),
         });
       }
