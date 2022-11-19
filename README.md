@@ -4,7 +4,7 @@
 
 [Lux Eye 2022](https://jmerle.github.io/lux-eye-2022/) is a visualizer for [Lux AI 2022](https://www.kaggle.com/competitions/lux-ai-2022-beta) episodes. It is available at [https://jmerle.github.io/lux-eye-2022/](https://jmerle.github.io/lux-eye-2022/).
 
-![](https://i.imgur.com/xFEYwL0.png)
+![](https://i.imgur.com/nEVt66M.png)
 
 ![](https://i.imgur.com/uUJ9UxE.png)
 
