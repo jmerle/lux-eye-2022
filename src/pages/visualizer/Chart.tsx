@@ -12,20 +12,15 @@ interface ChartProps {
   title: string;
   func: ChartFunction;
   step?: boolean;
-  info?: string;
 }
 
-export function Chart({ title, func, step, info }: ChartProps): JSX.Element {
+export function Chart({ title, func, step }: ChartProps): JSX.Element {
   const chartRef = useRef<any>(null);
 
   const episode = useStore(state => state.episode)!;
   const steps = episode.steps.filter(step => step.step > 0);
 
   const exportFileName = title.replace(/\W/g, '_');
-
-  if (info !== undefined) {
-    title += ' 🛈';
-  }
 
   const options: ApexOptions = {
     chart: {
@@ -83,24 +78,6 @@ export function Chart({ title, func, step, info }: ChartProps): JSX.Element {
         color: getTeamColor(i, 1.0),
       });
     }
-  }
-
-  if (info !== undefined) {
-    options.chart!.events = {
-      updated: chart => {
-        const chartContainer: HTMLDivElement = chart.core.el;
-
-        const titleContainer = chartContainer.querySelector('.apexcharts-title-text');
-        if (titleContainer !== null && titleContainer.querySelector('title') === null) {
-          const titleNode = document.createElement('title');
-          titleNode.textContent = info;
-          titleContainer.prepend(titleNode);
-
-          // Force SVG to redraw so info tooltip actually shows up
-          chartContainer.innerHTML += '';
-        }
-      },
-    };
   }
 
   return (

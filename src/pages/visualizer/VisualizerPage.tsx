@@ -89,11 +89,7 @@ export function VisualizerPage(): JSX.Element {
           <Chart title="Power in robots" func={funcRobotPower} />
         </Grid.Col>
         <Grid.Col span={12} md={4}>
-          <Chart
-            title="Total metal value"
-            func={funcTotalMetalValue}
-            info="Metal in factories + #light robots * light cost + #heavy robots * heavy cost + (ore in factories + ore in robots) * ore to metal ratio"
-          />
+          <Chart title="Total metal value" func={funcTotalMetalValue} />
         </Grid.Col>
         <Grid.Col span={12} md={4}>
           <Chart title="Ice in robots" func={funcCargo('robots', 'ice')} />
