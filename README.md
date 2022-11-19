@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/jmerle/lux-eye-2022/workflows/Build/badge.svg)](https://github.com/jmerle/lux-eye-2022/actions/workflows/build.yml)
 
-[Lux Eye 2022](https://jmerle.github.io/lux-eye-2022/) is a visualizer for [Lux AI 2022](https://www.kaggle.com/competitions/lux-ai-2022-beta) episodes. It is available at [https://jmerle.github.io/lux-eye-2022/](https://jmerle.github.io/lux-eye-2022).
+[Lux Eye 2022](https://jmerle.github.io/lux-eye-2022/) is a visualizer for [Lux AI 2022](https://www.kaggle.com/competitions/lux-ai-2022-beta) episodes. It is available at [https://jmerle.github.io/lux-eye-2022/](https://jmerle.github.io/lux-eye-2022/).
 
 ![](https://i.imgur.com/xFEYwL0.png)
 
