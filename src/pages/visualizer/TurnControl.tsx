@@ -62,17 +62,11 @@ export function TurnControl({ showHotkeysButton, showOpenButton }: TurnControlPr
 
     const gradientParts: [string, number, number][] = [];
 
-    for (let i = 0; i < episode.steps.length; i++) {
-      const weather = i < episode.steps.length ? episode.steps[i].weather : Weather.Normal;
-      const step =
-        i < episode.steps.length
-          ? episode.steps[i].step
-          : episode.steps[episode.steps.length - 1].step + (i - episode.steps.length + 1);
+    for (const step of episode.steps) {
+      const isDay = step.step < 0 || step.step % 50 < 30;
 
       let color: string;
-      const isDay = step < 0 || step % 50 < 30;
-
-      switch (weather) {
+      switch (step.weather) {
         case Weather.Normal:
           color = isDay ? '#e9ecef' : '#bdc3c7';
           break;
