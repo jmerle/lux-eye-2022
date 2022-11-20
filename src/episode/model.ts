@@ -121,7 +121,7 @@ export interface Board {
   ore: number[][];
   ice: number[][];
   lichen: number[][];
-  lichenStrains: number[][];
+  strains: number[][];
 }
 
 export interface Unit {
@@ -134,8 +134,9 @@ export interface Unit {
 }
 
 export interface Factory extends Unit {
-  strainId: number;
+  strain: number;
   action: FactoryAction | null;
+
   lichen: number;
 }
 

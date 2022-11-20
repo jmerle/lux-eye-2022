@@ -35,7 +35,7 @@ export function FactoryDetail({ factory }: FactoryDetailProps): JSX.Element {
           </Text>
         </Grid.Col>
         <Grid.Col span={6}>
-          <Text size="sm">Strain: {factory.strainId}</Text>
+          <Text size="sm">Strain: {factory.strain}</Text>
         </Grid.Col>
         <Grid.Col span={6}>
           <Text size="sm">Lichen: {factory.lichen}</Text>

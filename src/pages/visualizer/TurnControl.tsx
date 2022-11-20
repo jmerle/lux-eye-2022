@@ -327,7 +327,7 @@ export function TurnControl({ showHotkeysButton, showOpenButton }: TurnControlPr
       {selectedTile !== null && (
         <Group position="apart">
           <Text>Rubble: {step.board.rubble[selectedTile.y][selectedTile.x]}</Text>
-          <Text>Strain: {step.board.lichenStrains[selectedTile.y][selectedTile.x]}</Text>
+          <Text>Strain: {step.board.strains[selectedTile.y][selectedTile.x]}</Text>
           <Text>Lichen: {step.board.lichen[selectedTile.y][selectedTile.x]}</Text>
           <Text>Ice: {step.board.ice[selectedTile.y][selectedTile.x] > 0 ? 'Yes' : 'No'}</Text>
           <Text>Ore: {step.board.ore[selectedTile.y][selectedTile.x] > 0 ? 'Yes' : 'No'}</Text>

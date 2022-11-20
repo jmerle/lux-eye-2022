@@ -136,7 +136,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         ore: obs.board.ore,
         ice: obs.board.ice,
         lichen: obs.board.lichen,
-        lichenStrains: obs.board.lichen_strains,
+        strains: obs.board.lichen_strains,
       };
     } else if (Array.isArray(obs.board.rubble)) {
       board = {
@@ -144,7 +144,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         ore: JSON.parse(JSON.stringify(steps[i - 1].board.ore)),
         ice: JSON.parse(JSON.stringify(steps[i - 1].board.ice)),
         lichen: obs.board.lichen,
-        lichenStrains: obs.board.lichen_strains,
+        strains: obs.board.lichen_strains,
       };
     } else {
       board = JSON.parse(JSON.stringify(steps[i - 1].board));
@@ -152,7 +152,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
       for (const [item, grid] of <[string, number[][]][]>[
         ['rubble', board.rubble],
         ['lichen', board.lichen],
-        ['lichen_strains', board.lichenStrains],
+        ['lichen_strains', board.strains],
       ]) {
         for (const key in obs.board[item]) {
           const [x, y] = key.split(',').map(part => parseInt(part));
@@ -195,7 +195,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         let lichen = 0;
         for (let y = 0; y < board.lichen.length; y++) {
           for (let x = 0; x < board.lichen.length; x++) {
-            if (board.lichenStrains[y][x] === rawFactory.strain_id) {
+            if (board.strains[y][x] === rawFactory.strain_id) {
               lichen += board.lichen[y][x];
             }
           }
@@ -212,8 +212,9 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
           power: rawFactory.power,
           cargo: rawFactory.cargo,
 
-          strainId: rawFactory.strain_id,
+          strain: rawFactory.strain_id,
           action: actions[playerId][unitId] !== undefined ? parseFactoryAction(actions[playerId][unitId]) : null,
+
           lichen,
         });
       }

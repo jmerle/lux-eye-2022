@@ -50,7 +50,7 @@ function drawTileBackgrounds(ctx: CanvasRenderingContext2D, sizes: Sizes, step: 
   const teamStrains = new Map<number, number>();
   for (let i = 0; i < 2; i++) {
     for (const factory of step.teams[i].factories) {
-      teamStrains.set(factory.strainId, i);
+      teamStrains.set(factory.strain, i);
     }
   }
 
@@ -77,7 +77,7 @@ function drawTileBackgrounds(ctx: CanvasRenderingContext2D, sizes: Sizes, step: 
 
       const lichen = board.lichen[tileY][tileX];
       if (lichen > 0) {
-        const team = teamStrains.get(board.lichenStrains[tileY][tileX]);
+        const team = teamStrains.get(board.strains[tileY][tileX]);
         if (team !== undefined) {
           ctx.fillStyle = getTeamColor(team, 0.1 + scale(lichen, 0, 100) * 0.4);
           ctx.fillRect(canvasX, canvasY, sizes.tileSize, sizes.tileSize);
