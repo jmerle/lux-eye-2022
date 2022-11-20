@@ -96,12 +96,15 @@ export function TurnControl({ showHotkeysButton, showOpenButton }: TurnControlPr
       }
     }
 
+    let sliderEnd = pxPerStep * (episode.steps.length + 1);
     if (gradientParts.length > 0) {
-      gradientParts[gradientParts.length - 1][2] = Math.floor(gradientParts[gradientParts.length - 1][2]);
+      const lastGradientPart = gradientParts[gradientParts.length - 1];
+      lastGradientPart[2] = Math.floor(lastGradientPart[2]);
+      sliderEnd = lastGradientPart[2];
     }
 
     const gradientArgs = gradientParts.map(parts => `${parts[0]} ${parts[1]}px ${parts[2]}px`);
-    gradientArgs.push(`#228be6 ${pxPerStep * (episode.steps.length + 2)}px`);
+    gradientArgs.push(`#228be6 ${sliderEnd}px ${sliderWidth + padding * 2}px`);
 
     return {
       track: {
