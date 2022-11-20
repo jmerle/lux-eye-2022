@@ -138,6 +138,14 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         lichen: obs.board.lichen,
         lichenStrains: obs.board.lichen_strains,
       };
+    } else if (Array.isArray(obs.board.rubble)) {
+      board = {
+        rubble: obs.board.rubble,
+        ore: JSON.parse(JSON.stringify(steps[i - 1].board.ore)),
+        ice: JSON.parse(JSON.stringify(steps[i - 1].board.ice)),
+        lichen: obs.board.lichen,
+        lichenStrains: obs.board.lichen_strains,
+      };
     } else {
       board = JSON.parse(JSON.stringify(steps[i - 1].board));
 
