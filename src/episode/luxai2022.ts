@@ -64,13 +64,13 @@ function parseRobotAction(data: any): RobotAction {
     case 0:
       return {
         type: 'move',
-        repeat: data[4],
+        repeat: data[4] == 1,
         direction: data[1],
       };
     case 1:
       return {
         type: 'transfer',
-        repeat: data[4],
+        repeat: data[4] == 1,
         direction: data[1],
         resource: data[2],
         amount: data[3],
@@ -78,24 +78,24 @@ function parseRobotAction(data: any): RobotAction {
     case 2:
       return {
         type: 'pickup',
-        repeat: data[4],
+        repeat: data[4] == 1,
         resource: data[2],
         amount: data[3],
       };
     case 3:
       return {
         type: 'dig',
-        repeat: data[4],
+        repeat: data[4] == 1,
       };
     case 4:
       return {
         type: 'selfDestruct',
-        repeat: data[4],
+        repeat: data[4] == 1,
       };
     case 5:
       return {
         type: 'recharge',
-        repeat: data[4],
+        repeat: data[4] == 1,
         targetPower: data[3],
       };
     default:

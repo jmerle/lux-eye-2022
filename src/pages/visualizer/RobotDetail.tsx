@@ -8,6 +8,7 @@ import {
   IconBatteryCharging,
   IconBomb,
   IconHandGrab,
+  IconReload,
   IconShovel,
   IconWalk,
   TablerIconProps,
@@ -88,14 +89,14 @@ export function RobotDetail({ robot }: RobotDetailProps): JSX.Element {
     let icon: JSX.Element;
     let suffix: string;
 
-    if (action.repeat > 0) {
+    if (action.repeat) {
       icon = (
-        <Indicator inline label={action.repeat} color="dark" size={12} position="top-center" mt={4}>
+        <Indicator inline color="transparent" mt={4} label={<IconReload size={16} color="black" />}>
           {getActionIcon(action)}
         </Indicator>
       );
 
-      suffix = ` (repeat: ${action.repeat})`;
+      suffix = ' (repeated)';
     } else {
       icon = <span>{getActionIcon(action)}</span>;
       suffix = '';
