@@ -17,6 +17,18 @@ function transpose<T>(matrix: T[][]): T[][] {
   return matrix[0].map((value, i) => matrix.map(row => row[i]));
 }
 
+function isSetupAction(data: any): boolean {
+  if (data === null) {
+    return false;
+  }
+
+  return (
+    (data.bid !== undefined && data.faction !== undefined) ||
+    (data.spawn !== undefined && data.water !== undefined && data.metal !== undefined) ||
+    Object.keys(data).length === 0
+  );
+}
+
 function parseSetupAction(data: any): SetupAction {
   if (data.bid !== undefined && data.faction !== undefined) {
     return {
@@ -258,7 +270,7 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         placeFirst: rawTeam.place_first,
         factoriesToPlace: rawTeam.factories_to_place,
 
-        action: obs.real_env_steps < 0 && actions[playerId] !== null ? parseSetupAction(actions[playerId]) : null,
+        action: isSetupAction(actions[playerId]) ? parseSetupAction(actions[playerId]) : null,
       });
     }
 
