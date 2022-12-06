@@ -124,11 +124,12 @@ export function isLuxAI2022Episode(data: any): boolean {
 }
 
 export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = ['Player A', 'Player B']): Episode {
+  if (data.observations[0].board.valid_spawns_mask === undefined) {
+    throw new Error('Only Lux AI v1.1.0+ episodes are supported');
+  }
+
   const steps: Step[] = [];
   const weatherSchedule = data.observations[0].weather_schedule;
-
-  const transposeFn: (matrix: number[][]) => number[][] =
-    data.observations[0].board.valid_spawns_mask !== undefined ? transpose : matrix => matrix;
 
   for (let i = 0; i < data.observations.length; i++) {
     const obs = data.observations[i];
@@ -151,19 +152,19 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
     let board: Board;
     if (i === 0) {
       board = {
-        rubble: transposeFn(obs.board.rubble),
-        ore: transposeFn(obs.board.ore),
-        ice: transposeFn(obs.board.ice),
-        lichen: transposeFn(obs.board.lichen),
-        strains: transposeFn(obs.board.lichen_strains),
+        rubble: transpose(obs.board.rubble),
+        ore: transpose(obs.board.ore),
+        ice: transpose(obs.board.ice),
+        lichen: transpose(obs.board.lichen),
+        strains: transpose(obs.board.lichen_strains),
       };
     } else if (Array.isArray(obs.board.rubble)) {
       board = {
-        rubble: transposeFn(obs.board.rubble),
+        rubble: transpose(obs.board.rubble),
         ore: JSON.parse(JSON.stringify(steps[i - 1].board.ore)),
         ice: JSON.parse(JSON.stringify(steps[i - 1].board.ice)),
-        lichen: transposeFn(obs.board.lichen),
-        strains: transposeFn(obs.board.lichen_strains),
+        lichen: transpose(obs.board.lichen),
+        strains: transpose(obs.board.lichen_strains),
       };
     } else {
       board = JSON.parse(JSON.stringify(steps[i - 1].board));
