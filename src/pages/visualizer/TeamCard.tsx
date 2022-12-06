@@ -139,8 +139,11 @@ export function TeamCard({ id, tabHeight }: TeamCardProps): JSX.Element {
             <Grid.Col span={1}>
               <b>Metal:</b> {team.metal}
             </Grid.Col>
-            <Grid.Col span={2}>
-              <b>Factories to place:</b> {team.factoriesToPlace}
+            <Grid.Col span={1}>
+              <b>Place first:</b> {team.placeFirst ? 'Yes' : 'No'}
+            </Grid.Col>
+            <Grid.Col span={1}>
+              <b>Factories left:</b> {team.factoriesToPlace}
             </Grid.Col>
             <Grid.Col span={2}>
               <b>Action:</b> {team.action !== null ? formatAction(team.action) : 'None'}

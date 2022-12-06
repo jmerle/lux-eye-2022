@@ -13,6 +13,10 @@ import {
   Weather,
 } from './model';
 
+function transpose<T>(matrix: T[][]): T[][] {
+  return matrix[0].map((value, i) => matrix.map(row => row[i]));
+}
+
 function parseSetupAction(data: any): SetupAction {
   if (data.bid !== undefined && data.faction !== undefined) {
     return {
@@ -64,13 +68,13 @@ function parseRobotAction(data: any): RobotAction {
     case 0:
       return {
         type: 'move',
-        repeat: data[4] == 1,
+        repeat: data[4],
         direction: data[1],
       };
     case 1:
       return {
         type: 'transfer',
-        repeat: data[4] == 1,
+        repeat: data[4],
         direction: data[1],
         resource: data[2],
         amount: data[3],
@@ -78,24 +82,24 @@ function parseRobotAction(data: any): RobotAction {
     case 2:
       return {
         type: 'pickup',
-        repeat: data[4] == 1,
+        repeat: data[4],
         resource: data[2],
         amount: data[3],
       };
     case 3:
       return {
         type: 'dig',
-        repeat: data[4] == 1,
+        repeat: data[4],
       };
     case 4:
       return {
         type: 'selfDestruct',
-        repeat: data[4] == 1,
+        repeat: data[4],
       };
     case 5:
       return {
         type: 'recharge',
-        repeat: data[4] == 1,
+        repeat: data[4],
         targetPower: data[3],
       };
     default:
@@ -132,19 +136,19 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
     let board: Board;
     if (i === 0) {
       board = {
-        rubble: obs.board.rubble,
-        ore: obs.board.ore,
-        ice: obs.board.ice,
-        lichen: obs.board.lichen,
-        strains: obs.board.lichen_strains,
+        rubble: transpose(obs.board.rubble),
+        ore: transpose(obs.board.ore),
+        ice: transpose(obs.board.ice),
+        lichen: transpose(obs.board.lichen),
+        strains: transpose(obs.board.lichen_strains),
       };
     } else if (Array.isArray(obs.board.rubble)) {
       board = {
-        rubble: obs.board.rubble,
+        rubble: transpose(obs.board.rubble),
         ore: JSON.parse(JSON.stringify(steps[i - 1].board.ore)),
         ice: JSON.parse(JSON.stringify(steps[i - 1].board.ice)),
-        lichen: obs.board.lichen,
-        strains: obs.board.lichen_strains,
+        lichen: transpose(obs.board.lichen),
+        strains: transpose(obs.board.lichen_strains),
       };
     } else {
       board = JSON.parse(JSON.stringify(steps[i - 1].board));
@@ -166,12 +170,12 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
       const playerId = `player_${j}`;
 
       if (obs.teams[playerId] === undefined) {
+        const rawPlayer =
+          data.observations[1].teams[playerId] !== undefined ? data.observations[1].teams[playerId] : null;
+
         teams.push({
           name: teamNames[j],
-          faction:
-            data.observations[1].teams[playerId] !== undefined
-              ? data.observations[1].teams[playerId].faction
-              : Faction.None,
+          faction: rawPlayer !== null ? rawPlayer.faction : Faction.None,
 
           water: 0,
           metal: 0,
@@ -179,8 +183,8 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
           factories: [],
           robots: [],
 
-          factoriesToPlace: 0,
-          spawns: data.observations[0].board.spawns[playerId].map((arr: any) => ({ x: arr[0], y: arr[1] })),
+          placeFirst: rawPlayer !== null ? rawPlayer.place_first : false,
+          factoriesToPlace: rawPlayer !== null ? rawPlayer.factories_to_place : 0,
 
           action: actions[playerId] !== null ? parseSetupAction(actions[playerId]) : null,
         });
@@ -251,8 +255,8 @@ export function parseLuxAI2022Episode(data: any, teamNames: [string, string] = [
         factories,
         robots,
 
+        placeFirst: rawTeam.place_first,
         factoriesToPlace: rawTeam.factories_to_place,
-        spawns: steps[0].teams[j].spawns,
 
         action: obs.real_env_steps < 0 && actions[playerId] !== null ? parseSetupAction(actions[playerId]) : null,
       });

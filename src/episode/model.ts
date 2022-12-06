@@ -78,7 +78,7 @@ export interface WaterAction extends Action {
 }
 
 export interface RepeatableAction extends Action {
-  repeat: boolean;
+  repeat: number;
 }
 
 export interface MoveAction extends RepeatableAction {
@@ -155,8 +155,8 @@ export interface Team {
   factories: Factory[];
   robots: Robot[];
 
+  placeFirst: boolean;
   factoriesToPlace: number;
-  spawns: Tile[];
 
   action: SetupAction | null;
 }
