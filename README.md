@@ -6,7 +6,7 @@
 
 ![](https://i.imgur.com/XWXW3cJ.png)
 
-![](https://i.imgur.com/uUJ9UxE.png)
+![](https://i.imgur.com/Hn4WFPz.png)
 
 ## Development
 
