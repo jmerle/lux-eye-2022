@@ -3,6 +3,7 @@ import { useElementSize } from '@mantine/hooks';
 import { Navigate, useLocation } from 'react-router-dom';
 import { Cargo, RobotType, Unit } from '../../episode/model';
 import { useStore } from '../../store';
+import { LuxEyeS2Alert } from '../home/LuxEyeS2Alert';
 import { Board } from './Board';
 import { Chart, ChartFunction } from './Chart';
 import { TeamCard } from './TeamCard';
@@ -60,6 +61,7 @@ export function VisualizerPage(): JSX.Element {
 
   return (
     <div className={classes.container}>
+      <LuxEyeS2Alert mb={8} />
       <Grid columns={24}>
         <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
           <Grid.Col span={7}>{teamCards[0]}</Grid.Col>
